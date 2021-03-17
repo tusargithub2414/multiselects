@@ -1,0 +1,23 @@
+
+<div class="dropdown-container">
+  <div class="dropdown-button noselect" (click)="hideDropDown = !hideDropDown">
+      <div class="dropdown-label">Cuntry</div>
+      <div class="dropdown-quantity">(<span class="quantity">Any</span>)</div>
+      <span class="down-arrow-icon"> &#9660;</span>
+      <i class="fa fa-filter"></i>
+  </div>
+  <div class="dropdown-list" *ngIf="!hideDropDown">
+      <input type="search" #value (input)="onKeyPress(value)" placeholder="Search cuntry" class="dropdown-search">
+      <ul *ngIf="filteredData.length == 0 && searchKeyword === ''">
+          <li *ngFor="let opt of options; let i = index">
+              <input [id]="i"  type="checkbox"  (change)="selected($event , i)" [value]="opt.value">
+              <label [for]="i">{{opt?.label}}</label></li>
+      </ul>
+      <ul *ngIf="filteredData.length != 0 || searchKeyword !== ''">
+          <li *ngFor="let opt of filteredData; let i = index">
+              <input [id]="i"  type="checkbox"  (change)="selected($event , i)" [value]="opt.value">
+              <label [for]="i">{{opt?.label}}</label></li>
+      </ul>
+  </div>
+</div>
+
